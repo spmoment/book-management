@@ -1,1 +1,1 @@
-Readme file
+Book management application
