@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import javax.xml.bind.ValidationException;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -23,17 +24,17 @@ public class DefaultAuthorService implements AuthorService {
     @Override
     public AuthorsDto saveAuthor(AuthorsDto authorsDto) throws ValidationException {
         validateAuthorsDto(authorsDto);
-        log.info("method: saveAuthor");
+        log.info("method: saveAuthor" + authorsDto);
         Authors savedAuthors = authorsRepository.save(authorsConverter.fromAuthorsDtoToAuthors(authorsDto));
         return authorsConverter.fromAuthorsToAuthorsDto(savedAuthors);
     }
 
     private void validateAuthorsDto(AuthorsDto authorsDto) throws ValidationException {
-        log.info("method: validateAuthorsDto, before if (isNull(authorsDto))");
+        log.info("method: validateAuthorsDto, before if (isNull(authorsDto))" + authorsDto);
         if (isNull(authorsDto)) {
             throw new ValidationException("Object user is null");
         }
-        log.info("method: validateAuthorsDto, before if (isNull(authorsDto.getLastName()))");
+        log.info("method: validateAuthorsDto, before if (isNull(authorsDto.getLastName()))" + authorsDto.getLastName());
         if (isNull(authorsDto.getLastName())) {
             throw new ValidationException("Lastname is empty");
         }
@@ -41,14 +42,14 @@ public class DefaultAuthorService implements AuthorService {
 
     @Override
     public AuthorsDto updateAuthor(AuthorsDto updateAuthor) {
-        log.info("method: updateAuthor");
+        log.info("method: updateAuthor" + updateAuthor);
         Authors updateAuthors = authorsRepository.save(authorsConverter.fromAuthorsDtoToAuthors(updateAuthor));
         return authorsConverter.fromAuthorsToAuthorsDto(updateAuthors);
     }
 
     @Override
     public void deleteAuthor(Integer id) {
-        log.info("method: deleteAuthor");
+        log.info("method: deleteAuthor" + id);
         authorsRepository.deleteById(id);
     }
 
@@ -63,10 +64,8 @@ public class DefaultAuthorService implements AuthorService {
 
     @Override
     public AuthorsDto findAuthorBySurname(String surname) {
-        log.info("method: findAuthorBySurname");
+        log.info("method: findAuthorBySurname" + surname);
         Authors authors = authorsRepository.findAuthorBySurname(surname);
-        if(authors != null)
-            return authorsConverter.fromAuthorsToAuthorsDto(authors);
-        return null;
+        return Optional.of(authorsConverter.fromAuthorsToAuthorsDto(authors)).orElse(null);
     }
 }

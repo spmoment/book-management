@@ -23,13 +23,13 @@ public class DefaultBookService implements BookService{
     @Override
     public BooksDto saveBook(BooksDto booksDto) throws ValidationException {
         validateBooksDto(booksDto);
-        log.info("method: saveBook");
+        log.info("method: saveBook" + booksDto);
         Books savedBooks = booksRepository.save(booksConverter.fromBooksDtoToBooks(booksDto));
         return booksConverter.fromBooksToBooksDto(savedBooks);
     }
 
     private void validateBooksDto(BooksDto booksDto) throws ValidationException {
-        log.info("method: validateBooksDto, before if (isNull(booksDto))");
+        log.info("method: validateBooksDto, before if (isNull(booksDto))" + booksDto);
         if (isNull(booksDto)) {
             throw new ValidationException("Object user is null");
         }
@@ -37,7 +37,7 @@ public class DefaultBookService implements BookService{
 
     @Override
     public BooksDto updateAuthor(BooksDto updateBook) {
-        log.info("method: updateAuthor");
+        log.info("method: updateBook" + updateBook);
         Books updateBooks = booksRepository.save(booksConverter.fromBooksDtoToBooks(updateBook));
         return booksConverter.fromBooksToBooksDto(updateBooks);
     }
@@ -58,7 +58,7 @@ public class DefaultBookService implements BookService{
 
     @Override
     public BooksDto findBookById(Integer id) {
-        log.info("method: findBookById");
+        log.info("method: findBookById" + id);
         Books books = booksRepository.findBookById(id);
         if(books != null)
             return booksConverter.fromBooksToBooksDto(books);
