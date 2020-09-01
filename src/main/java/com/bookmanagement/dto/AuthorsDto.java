@@ -2,6 +2,12 @@ package com.bookmanagement.dto;
 
 import java.time.LocalDate;
 
+/**
+ * Authors dto class
+ *
+ * @author ....
+ * @see com.bookmanagement.entity.Authors
+ */
 public class AuthorsDto {
 
     private Integer id;
