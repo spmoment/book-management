@@ -2,9 +2,10 @@ package com.bookmanagement.service;
 
 import com.bookmanagement.dto.AuthorsDto;
 import com.bookmanagement.entity.Authors;
+import com.bookmanagement.exception.NotFoundException;
 import com.bookmanagement.repository.AuthorsRepository;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
 import javax.xml.bind.ValidationException;
 import java.util.List;
 import java.util.Optional;
@@ -16,10 +17,14 @@ import static java.util.Objects.isNull;
 @Service
 public class DefaultAuthorService implements AuthorService {
 
+    private static final Logger log = Logger.getLogger("DefaultAuthorService.class");
+    private final AuthorsRepository authorsRepository;
+    private final AuthorsConverter authorsConverter;
 
-    private AuthorsRepository authorsRepository;
-    private AuthorsConverter authorsConverter;
-    private static final Logger log = (Logger) LoggerFactory.getLogger(DefaultAuthorService.class);
+    public DefaultAuthorService(AuthorsRepository authorsRepository, AuthorsConverter authorsConverter) {
+        this.authorsRepository = authorsRepository;
+        this.authorsConverter = authorsConverter;
+    }
 
     @Override
     public AuthorsDto saveAuthor(AuthorsDto authorsDto) throws ValidationException {
@@ -32,7 +37,7 @@ public class DefaultAuthorService implements AuthorService {
     private void validateAuthorsDto(AuthorsDto authorsDto) throws ValidationException {
         log.info("method: validateAuthorsDto, before if (isNull(authorsDto))" + authorsDto);
         if (isNull(authorsDto)) {
-            throw new ValidationException("Object user is null");
+            throw new ValidationException("Object author is null");
         }
         log.info("method: validateAuthorsDto, before if (isNull(authorsDto.getLastName()))" + authorsDto.getLastName());
         if (isNull(authorsDto.getLastName())) {
@@ -41,10 +46,13 @@ public class DefaultAuthorService implements AuthorService {
     }
 
     @Override
-    public AuthorsDto updateAuthor(AuthorsDto updateAuthor) {
-        log.info("method: updateAuthor" + updateAuthor);
-        Authors updateAuthors = authorsRepository.save(authorsConverter.fromAuthorsDtoToAuthors(updateAuthor));
-        return authorsConverter.fromAuthorsToAuthorsDto(updateAuthors);
+    public AuthorsDto updateAuthor(AuthorsDto updateDto) throws ValidationException, NotFoundException {
+        log.info("method: updateAuthor" + updateDto);
+        Authors author = authorsRepository.findById(updateDto.getId()).orElseThrow(() -> new NotFoundException("Author not found with id=" + updateDto.getId()));
+        author.setFirstName(updateDto.getFirstName());
+        author.setLastName(updateDto.getLastName());
+        author.setYearOfBirth(updateDto.getYearOfBirth());
+        return updateDto;
     }
 
     @Override
@@ -63,9 +71,9 @@ public class DefaultAuthorService implements AuthorService {
     }
 
     @Override
-    public AuthorsDto findAuthorBySurname(String surname) {
-        log.info("method: findAuthorBySurname" + surname);
-        Authors authors = authorsRepository.findAuthorBySurname(surname);
+    public AuthorsDto findAuthorByLastName(String lastName) {
+        log.info("method: findAuthorByLastName" + lastName);
+        Authors authors = authorsRepository.findAuthorByLastName(lastName);
         return Optional.of(authorsConverter.fromAuthorsToAuthorsDto(authors)).orElse(null);
     }
 }
