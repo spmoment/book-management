@@ -3,10 +3,10 @@ package com.bookmanagement.service;
 import com.bookmanagement.dto.BooksDto;
 import com.bookmanagement.entity.Books;
 import com.bookmanagement.exception.NotFoundException;
+import com.bookmanagement.exception.ValidationException;
 import com.bookmanagement.repository.BooksRepository;
 import org.springframework.stereotype.Service;
 
-import javax.xml.bind.ValidationException;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -16,9 +16,9 @@ import static java.util.Objects.isNull;
 @Service
 public class DefaultBookService implements BookService {
 
-    private static final Logger log = Logger.getLogger("DefaultBookService.class");
     private BooksRepository booksRepository;
     private BooksConverter booksConverter;
+    private static final Logger log = Logger.getLogger("DefaultBookService.class");
 
     public DefaultBookService(BooksRepository booksRepository, BooksConverter booksConverter) {
         this.booksRepository = booksRepository;
@@ -41,17 +41,19 @@ public class DefaultBookService implements BookService {
     }
 
     @Override
-    public BooksDto updateAuthor(BooksDto updateBook) throws NotFoundException {
-        log.info("method: updateBook" + updateBook);
-        Books book = booksRepository.findById(updateBook.getId()).orElseThrow(() -> new NotFoundException("Book not found with id=" + updateBook.getId()));
-        book.setTitle(updateBook.getTitle());
-        book.setYearPublishing(updateBook.getYearPublishing());
-        book.setAnnotation(updateBook.getAnnotation());
-        return updateBook;
+    public BooksDto updateBook(BooksDto updateDto) throws NotFoundException {
+        log.info("method: updateBook" + updateDto);
+        Books book = booksRepository.findById(updateDto.getId()).orElseThrow(() -> new NotFoundException("Book not found with id=" + updateDto.getId()));
+        book.setTitle(updateDto.getTitle());
+        book.setYearPublishing(updateDto.getYearPublishing());
+        book.setAnnotation(updateDto.getAnnotation());
+        booksRepository.save(book);
+        return updateDto;
     }
 
     @Override
     public void deleteBook(Integer id) {
+        log.info("method: deleteBook" + id);
         booksRepository.deleteById(id);
     }
 
