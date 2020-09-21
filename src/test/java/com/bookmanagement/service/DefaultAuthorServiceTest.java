@@ -1,11 +1,10 @@
 package com.bookmanagement.service;
 
 import com.bookmanagement.dto.AuthorsDto;
+import com.bookmanagement.exception.ValidationException;
 import com.bookmanagement.repository.AuthorsRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import javax.xml.bind.ValidationException;
 
 import static com.bookmanagement.prototype.AuthorsPrototype.prAuhorDto;
 import static com.bookmanagement.prototype.AuthorsPrototype.prAuthor;

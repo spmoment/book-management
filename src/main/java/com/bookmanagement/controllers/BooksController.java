@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin
 public class BooksController {
 
     private static final Logger log = Logger.getLogger("BooksController.class");

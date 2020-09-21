@@ -28,7 +28,7 @@ public class DefaultBookService implements BookService {
     @Override
     public BooksDto saveBook(BooksDto booksDto) throws ValidationException {
         validateBooksDto(booksDto);
-        log.info("method: saveBook" + booksDto);
+        log.info("method: saveBook " + booksDto);
         Books savedBooks = booksRepository.save(booksConverter.fromBooksDtoToBooks(booksDto));
         return booksConverter.fromBooksToBooksDto(savedBooks);
     }

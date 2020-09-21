@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+tr{transition:all .25s ease-in-out}
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+ tr:hover{background-color:lightgreen;cursor: pointer}
+
+    </style>
+</head>
+<body>
+
+<h2>Book management</h2>
+
+<table id="booksList"></table>
+
+<table id="authorsList"></table>
+
+<div class="tab tab-2">
+    <input id="book_id" name="bookId" type="hidden">
+    <input id="book_title" name="title" placeholder="Title" type="text">
+    <input id="book_year_pub" name="year_pub" placeholder="Year publishing" type="text">
+    <input id="book_an" name="annot" placeholder="Annotation" type="text">
+    <input id="author_id" name="a_id" placeholder="Author id" type="text">
+
+    <button onclick="createBook();">Create book</button>
+    <button onclick="editBook();">Edit</button>
+</div>
+
+<div class="tab tab-2">
+    <input id="aut_id" name="autId" type="hidden">
+    <input id="author_first_name" name="author_fn" placeholder="First name" type="text">
+    <input id="author_last_name" name="author_ln" placeholder="Last Name" type="text">
+    <input id="author_year_of_birth" name="author_yob" placeholder="Year of birth" type="text">
+
+    <button onclick="createAuthor();">Create author</button>
+    <button onclick="editAuthor();">Edit</button>
+</div>
+
+<input id="search_field_book" placeholder="Enter book id">
+<button onclick="searchById()">Search by id</button>
+
+<input id="search_field_author" placeholder="Enter author login">
+<button onclick="searchByLastName()">Search by Last Name</button>
+
+<script src="constant.js"></script>
+
+<script src="books.js"></script>
+
+<script src="authors.js"></script>
+</body>
+</html>

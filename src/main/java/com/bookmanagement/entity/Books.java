@@ -1,7 +1,15 @@
 package com.bookmanagement.entity;
 
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -23,7 +31,10 @@ public class Books {
     @Column(name = "annotation")
     private String annotation;
 
-    @ManyToMany(mappedBy = "bookList")
+    @ManyToMany()
+    @JoinTable(name = "books_authors",
+            joinColumns = {@JoinColumn(name = "books_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "authors_id", referencedColumnName = "id")})
     private Set<Authors> authorList;
 
     public Integer getId() {

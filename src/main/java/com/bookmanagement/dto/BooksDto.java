@@ -2,6 +2,7 @@ package com.bookmanagement.dto;
 
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class BooksDto {
 
@@ -9,12 +10,14 @@ public class BooksDto {
     private String title;
     private LocalDate yearPublishing;
     private String annotation;
+    private List<AuthorsDto> authorsDtos;
 
-    public BooksDto(Integer id, String title, LocalDate yearPublishing, String annotation) {
+    public BooksDto(Integer id, String title, LocalDate yearPublishing, String annotation, List<AuthorsDto> authorsDtos) {
         this.id = id;
         this.title = title;
         this.yearPublishing = yearPublishing;
         this.annotation = annotation;
+        this.authorsDtos = authorsDtos;
     }
 
     public Integer getId() {
@@ -47,6 +50,14 @@ public class BooksDto {
 
     public void setAnnotation(String annotation) {
         this.annotation = annotation;
+    }
+
+    public List<AuthorsDto> getAuthorsDtos() {
+        return authorsDtos;
+    }
+
+    public void setAuthorsDtos(List<AuthorsDto> authorsDtos) {
+        this.authorsDtos = authorsDtos;
     }
 
     @Override
