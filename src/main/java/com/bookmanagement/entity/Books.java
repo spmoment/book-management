@@ -1,16 +1,9 @@
 package com.bookmanagement.entity;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -77,49 +70,31 @@ public class Books {
         this.authorList = authorList;
     }
 
+
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((title == null) ? 0 : title.hashCode());
-        result = prime * result + ((yearPublishing == null) ? 0 : yearPublishing.hashCode());
-        result = prime * result + ((annotation == null) ? 0 : annotation.hashCode());
-        return result;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Books books = (Books) o;
+        return Objects.equals(id, books.id) &&
+                Objects.equals(title, books.title) &&
+                Objects.equals(yearPublishing, books.yearPublishing) &&
+                Objects.equals(annotation, books.annotation) &&
+                Objects.equals(authorList, books.authorList);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Books other = (Books) obj;
-        if (title == null) {
-            if (other.title != null)
-                return false;
-        } else if (!title.equals(other.title))
-            return false;
-        if (yearPublishing == null) {
-            if (other.yearPublishing != null)
-                return false;
-        } else if (!yearPublishing.equals(other.yearPublishing))
-            return false;
-        if (annotation == null) {
-            if (other.annotation != null)
-                return false;
-        } else if (!annotation.equals(other.annotation))
-            return false;
-        if (id != other.id)
-            return false;
-        return true;
+    public int hashCode() {
+        return Objects.hash(id, title, yearPublishing, annotation, authorList);
     }
 
     @Override
     public String toString() {
-        return "Books [id=" + id + ", title=" + title + ", yearPublishing=" + yearPublishing + ", annotation=" + annotation + "]";
+        return "Books{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", yearPublishing=" + yearPublishing +
+                ", annotation='" + annotation + '\'' +
+                '}';
     }
-
 }

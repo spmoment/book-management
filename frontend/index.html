@@ -25,9 +25,9 @@ tr:nth-child(even) {
 
 <h2>Book management</h2>
 
-<table id="booksList"></table>
+<h3>Books List</h3>
 
-<table id="authorsList"></table>
+<table id="booksList"></table>
 
 <div class="tab tab-2">
     <input id="book_id" name="bookId" type="hidden">
@@ -40,6 +40,13 @@ tr:nth-child(even) {
     <button onclick="editBook();">Edit</button>
 </div>
 
+<input id="search_field_book" placeholder="Enter book id">
+<button onclick="searchById()">Search by id</button>
+
+<h3>Authors List</h3>
+
+<table id="authorsList"></table>
+
 <div class="tab tab-2">
     <input id="aut_id" name="autId" type="hidden">
     <input id="author_first_name" name="author_fn" placeholder="First name" type="text">
@@ -49,9 +56,6 @@ tr:nth-child(even) {
     <button onclick="createAuthor();">Create author</button>
     <button onclick="editAuthor();">Edit</button>
 </div>
-
-<input id="search_field_book" placeholder="Enter book id">
-<button onclick="searchById()">Search by id</button>
 
 <input id="search_field_author" placeholder="Enter author login">
 <button onclick="searchByLastName()">Search by Last Name</button>
