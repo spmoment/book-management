@@ -6,7 +6,6 @@ import com.bookmanagement.exception.ValidationException;
 import com.bookmanagement.service.BookService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +19,12 @@ import java.util.logging.Logger;
 public class BooksController {
 
     private static final Logger log = Logger.getLogger("BooksController.class");
-    @Autowired
+
     BookService bookService;
+
+    public BooksController(BookService bookService) {
+        this.bookService = bookService;
+    }
 
     @PostMapping("/saveBook")
     @ApiOperation(value = "Create a book", response = BooksDto.class)
