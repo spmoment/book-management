@@ -24,6 +24,9 @@ public class Books {
     @Column(name = "annotation")
     private String annotation;
 
+    @Column(name = "price")
+    private Integer price;
+
     @ManyToMany()
     @JoinTable(name = "books_authors",
             joinColumns = {@JoinColumn(name = "books_id", referencedColumnName = "id")},
@@ -70,6 +73,13 @@ public class Books {
         this.authorList = authorList;
     }
 
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -80,12 +90,13 @@ public class Books {
                 Objects.equals(title, books.title) &&
                 Objects.equals(yearPublishing, books.yearPublishing) &&
                 Objects.equals(annotation, books.annotation) &&
+                Objects.equals(price, books.price) &&
                 Objects.equals(authorList, books.authorList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, yearPublishing, annotation, authorList);
+        return Objects.hash(id, title, yearPublishing, annotation, price, authorList);
     }
 
     @Override
@@ -95,6 +106,8 @@ public class Books {
                 ", title='" + title + '\'' +
                 ", yearPublishing=" + yearPublishing +
                 ", annotation='" + annotation + '\'' +
+                ", price=" + price +
+                ", authorList=" + authorList +
                 '}';
     }
 }

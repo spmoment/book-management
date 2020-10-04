@@ -47,6 +47,7 @@ public class DefaultBookService implements BookService {
         book.setTitle(updateDto.getTitle());
         book.setYearPublishing(updateDto.getYearPublishing());
         book.setAnnotation(updateDto.getAnnotation());
+        book.setPrice(updateDto.getPrice());
         booksRepository.save(book);
         return updateDto;
     }

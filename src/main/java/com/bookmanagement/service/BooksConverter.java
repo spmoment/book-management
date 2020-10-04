@@ -30,6 +30,7 @@ public class BooksConverter {
         books.setTitle(booksDto.getTitle());
         books.setYearPublishing(booksDto.getYearPublishing());
         books.setAnnotation(booksDto.getAnnotation());
+        books.setPrice(booksDto.getPrice());
         books.setAuthorList(authorsDtos);
         return books;
     }
@@ -45,6 +46,7 @@ public class BooksConverter {
                 books.getTitle(),
                 books.getYearPublishing(),
                 books.getAnnotation(),
+                books.getPrice(),
                 authorsDtos);
     }
 }

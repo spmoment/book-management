@@ -23,6 +23,7 @@
                         '        <th>Title</th>\n' +
                         '        <th>Year Publishing</th>\n' +
                         '        <th>Annotation</th>\n' +
+                        '        <th>Price</th>\n' +
                         '        <th>Delete</th>\n' +
                         '    </tr>';
                         for (var i = 0; i < books.length; i++) {
@@ -31,6 +32,7 @@
                                 '        <td>' + book.title + '</td>\n' +
                                 '        <td>' + book.yearPublishing + '</td>\n' +
                                 '        <td>' + book.annotation + '</td>' +
+                                '        <td>' + book.price + '</td>' +
                                 '        <td><button onclick="deleteBook(' + book.id + ')">Delete</button></td></tr>';
                         }
                         document.getElementById("booksList").innerHTML = html;
@@ -50,12 +52,14 @@
                                 '        <th>Title</th>\n' +
                                 '        <th>Year Publishing</th>\n' +
                                 '        <th>Annotation</th>\n' +
+                                '        <th>Price</th>\n' +
                                 '        <th>Delete</th>\n' +
                                 '    </tr>';
                             html = html + '<tr><td>' + book.id + '</td>\n' +
                                 '        <td>' + book.title + '</td>\n' +
                                 '        <td>' + book.yearPublishing + '</td>\n' +
                                 '        <td>' + book.annotation + '</td>' +
+                                '        <td>' + book.price + '</td>' +
                                 '        <td><button onclick="deleteBook(' + book.id + ')">Delete</button></td></tr>';
                             document.getElementById("booksList").innerHTML = html;
                         }
@@ -69,6 +73,7 @@
                     var bookTitle = document.getElementById("book_title").value;
                     var bookYearPub = document.getElementById("book_year_pub").value;
                     var bookAn = document.getElementById("book_an").value;
+                    var bookPr = document.getElementById("book_pr").value;
                     var authorId = document.getElementById("author_id").value;
 
                     var xhttp = new XMLHttpRequest();
@@ -78,6 +83,7 @@
                     'title': bookTitle,
                     'yearPublishing': bookYearPub,
                     'annotation': bookAn,
+                    'price': bookPr,
                     'authorsDtos': [{'id': authorId}]}));
 
                     xhttp.onreadystatechange = function() {
@@ -96,15 +102,17 @@
               document.getElementById("book_title").value = booksList.rows[i].cells[1].innerHTML;
               document.getElementById("book_year_pub").value = booksList.rows[i].cells[2].innerHTML;
               document.getElementById("book_an").value = booksList.rows[i].cells[3].innerHTML;
+              document.getElementById("book_pr").value = booksList.rows[i].cells[4].innerHTML;
 
             }
 
             function editBook() {
+
                     var bookId = document.getElementById("book_id").value;
                     var bookTitle = document.getElementById("book_title").value;
                     var bookYearPub = document.getElementById("book_year_pub").value;
                     var bookAn = document.getElementById("book_an").value;
-                    var authorId = document.getElementById("author_id").value;
+                    var bookPr = document.getElementById("book_pr").value;
 
                     var xhttp = new XMLHttpRequest();
                     xhttp.open("PUT", url + "api/updateBook");
@@ -113,7 +121,8 @@
                     'id': bookId,
                     'title': bookTitle,
                     'yearPublishing': bookYearPub,
-                    'annotation': bookAn
+                    'annotation': bookAn,
+                    'price': bookPr
                     }));
 
                     xhttp.onreadystatechange = function() {

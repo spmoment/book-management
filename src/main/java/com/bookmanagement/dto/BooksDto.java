@@ -10,13 +10,15 @@ public class BooksDto {
     private String title;
     private LocalDate yearPublishing;
     private String annotation;
+    private Integer price;
     private List<AuthorsDto> authorsDtos;
 
-    public BooksDto(Integer id, String title, LocalDate yearPublishing, String annotation, List<AuthorsDto> authorsDtos) {
+    public BooksDto(Integer id, String title, LocalDate yearPublishing, String annotation, Integer price, List<AuthorsDto> authorsDtos) {
         this.id = id;
         this.title = title;
         this.yearPublishing = yearPublishing;
         this.annotation = annotation;
+        this.price = price;
         this.authorsDtos = authorsDtos;
     }
 
@@ -52,6 +54,14 @@ public class BooksDto {
         this.annotation = annotation;
     }
 
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
     public List<AuthorsDto> getAuthorsDtos() {
         return authorsDtos;
     }
@@ -62,6 +72,12 @@ public class BooksDto {
 
     @Override
     public String toString() {
-        return "Books [id=" + id + ", title=" + title + ", yearPublishing=" + yearPublishing + ", annotation=" + annotation + "]";
+        return "BooksDto{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", yearPublishing=" + yearPublishing +
+                ", annotation='" + annotation + '\'' +
+                ", price='" + price + '\'' +
+                '}';
     }
 }

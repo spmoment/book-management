@@ -49,3 +49,6 @@ alter table orders
     add constraint orders_users_id_fk
         foreign key (user_id) references users;
 
+
+alter table books
+    add price int;
