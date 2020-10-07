@@ -7,6 +7,8 @@ import com.bookmanagement.repository.UsersRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
 
@@ -20,14 +22,21 @@ public class UserService {
     }
 
     public Users saveUser(Users users) {
-        users.setPhoneNumber(users.getPhoneNumber());
-        users.setPassword(passwordEncoder.encode(users.getPassword()));
-        users.setRole(EnumRole.COSTUMER);
-        return usersRepository.save(users);
+        if (users.getPhoneNumber().equals("") || users.getPassword().equals("")) {
+            return null;
+        }
+        if (usersRepository.findByPhoneNumber(users.getPhoneNumber()) != null) {
+            return null;
+        } else {
+            users.setPhoneNumber(users.getPhoneNumber());
+            users.setPassword(passwordEncoder.encode(users.getPassword()));
+            users.setRole(EnumRole.COSTUMER);
+            return usersRepository.save(users);
+        }
     }
 
     public Users findByPhoneNumber(String phoneNumber) {
-        return usersRepository.findByPhoneNumber(phoneNumber);
+        return Optional.ofNullable(usersRepository.findByPhoneNumber(phoneNumber)).orElse(null);
     }
 
     public Users findByPhoneNumberAndPassword(String phoneNumber, String password) {
