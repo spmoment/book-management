@@ -2,7 +2,8 @@
 
             function deleteBook(bookId) {
                 var xhttp = new XMLHttpRequest();
-                xhttp.open("DELETE", url + "api/deleteBook/" + bookId, true);
+                xhttp.open("DELETE", url + "admin/deleteBook/" + bookId, true);
+                enrichHeaderWithAuth(xhttp);
                 xhttp.send();
                 xhttp.onreadystatechange = function() {
                         if (this.readyState == 4 && this.status == 200) {
@@ -13,7 +14,7 @@
 
             function loadBooks() {
                 var xhttp = new XMLHttpRequest();
-                xhttp.open("GET", url + "api/findAllBooks", true);
+                xhttp.open("GET", url + "costumer/findAllBooks", true);
                 xhttp.send();
                 xhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
@@ -64,7 +65,7 @@
                             document.getElementById("booksList").innerHTML = html;
                         }
                     };
-                    xhttp.open("GET", url + "api/findBookById?id=" + test, true);
+                    xhttp.open("GET", url + "costumer/findBookById?id=" + test, true);
                     xhttp.send();
             }
 
@@ -77,7 +78,8 @@
                     var authorId = document.getElementById("author_id").value;
 
                     var xhttp = new XMLHttpRequest();
-                    xhttp.open("POST", url + "api/saveBook");
+                    xhttp.open("POST", url + "admin/saveBook");
+                    enrichHeaderWithAuth(xhttp);
                     xhttp.setRequestHeader("Content-Type", "application/json");
                     xhttp.send(JSON.stringify({
                     'title': bookTitle,
@@ -107,7 +109,6 @@
             }
 
             function editBook() {
-
                     var bookId = document.getElementById("book_id").value;
                     var bookTitle = document.getElementById("book_title").value;
                     var bookYearPub = document.getElementById("book_year_pub").value;
@@ -115,7 +116,8 @@
                     var bookPr = document.getElementById("book_pr").value;
 
                     var xhttp = new XMLHttpRequest();
-                    xhttp.open("PUT", url + "api/updateBook");
+                    xhttp.open("PUT", url + "admin/updateBook");
+                    enrichHeaderWithAuth(xhttp);
                     xhttp.setRequestHeader("Content-Type", "application/json");
                     xhttp.send(JSON.stringify({
                     'id': bookId,

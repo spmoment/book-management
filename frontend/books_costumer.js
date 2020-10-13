@@ -1,7 +1,7 @@
 
 function getBook() {
                 var xhttp = new XMLHttpRequest();
-                xhttp.open("GET", url + "api/findAllBooks", true);
+                xhttp.open("GET", url + "costumer/findAllBooks", true);
                 xhttp.send();
                 xhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {

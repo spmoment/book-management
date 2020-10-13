@@ -31,8 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/admin/*").hasRole(EnumRole.ADMIN.name())
-                .antMatchers("/costumer/*").hasRole(EnumRole.COSTUMER.name())
-                .antMatchers("/register", "/auth").permitAll()
+                .antMatchers("/register", "/auth", "/costumer/*").permitAll()
                 .and()
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
     }

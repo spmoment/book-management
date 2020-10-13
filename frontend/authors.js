@@ -2,7 +2,8 @@
 
             function deleteAuthor(authorId) {
                 var xhttp = new XMLHttpRequest();
-                xhttp.open("DELETE", url + "api/deleteAuthor/" + authorId, true);
+                xhttp.open("DELETE", url + "admin/deleteAuthor/" + authorId, true);
+                enrichHeaderWithAuth(xhttp);
                 xhttp.send();
                 xhttp.onreadystatechange = function() {
                         if (this.readyState == 4 && this.status == 200) {
@@ -13,7 +14,7 @@
 
             function loadAuthors() {
                 var xhttp = new XMLHttpRequest();
-                xhttp.open("GET", url + "api/findAllAuthors", true);
+                xhttp.open("GET", url + "costumer/findAllAuthors", true);
                 xhttp.send();
                 xhttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
@@ -60,7 +61,7 @@
                             document.getElementById("authorsList").innerHTML = html;
                         }
                     };
-                    xhttp.open("GET", url + "api/findByLastName?lastName=" + test, true);
+                    xhttp.open("GET", url + "costumer/findByLastName?lastName=" + test, true);
                     xhttp.send();
             }
 
@@ -70,7 +71,8 @@
                                 var authorYearOfBirth = document.getElementById("author_year_of_birth").value;
 
                                 var xhttp = new XMLHttpRequest();
-                                xhttp.open("POST", url + "api/saveAuthor");
+                                xhttp.open("POST", url + "admin/saveAuthor");
+                                enrichHeaderWithAuth(xhttp);
                                 xhttp.setRequestHeader("Content-Type", "application/json");
                                 xhttp.send(JSON.stringify({
                                 'firstName': authorFirstName,
@@ -102,7 +104,8 @@
                     var author_yob = document.getElementById("author_year_of_birth").value;
 
                     var xhttp = new XMLHttpRequest();
-                    xhttp.open("PUT", url + "api/updateAuthor");
+                    xhttp.open("PUT", url + "admin/updateAuthor");
+                    enrichHeaderWithAuth(xhttp);
                     xhttp.setRequestHeader("Content-Type", "application/json");
                     xhttp.send(JSON.stringify({
                     'id': autId,

@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("/api")
 @CrossOrigin
 @Api(description = "Operations pertaining to books in Online Store")
 public class BooksController {
@@ -26,21 +25,21 @@ public class BooksController {
         this.bookService = bookService;
     }
 
-    @PostMapping("/saveBook")
+    @PostMapping("/admin/saveBook")
     @ApiOperation(value = "Create a book", response = BooksDto.class)
     BooksDto saveBook(@RequestBody BooksDto booksDto) throws ValidationException {
         log.info("handling create book request: " + booksDto);
         return bookService.saveBook(booksDto);
     }
 
-    @PutMapping("/updateBook")
+    @PutMapping("/admin/updateBook")
     @ApiOperation(value = "Update a book", response = BooksDto.class)
     BooksDto updateBook(@RequestBody BooksDto booksDto) throws NotFoundException {
         log.info("handling update book request: " + booksDto);
         return bookService.updateBook(booksDto);
     }
 
-    @DeleteMapping("/deleteBook/{id}")
+    @DeleteMapping("/admin/deleteBook/{id}")
     @ApiOperation(value = "Delete a book", response = Integer.class)
     ResponseEntity<Void> deleteBook(@PathVariable Integer id) {
         log.info("handling delete book request: id=" + id);
@@ -48,14 +47,14 @@ public class BooksController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/findBookById")
+    @GetMapping("/costumer/findBookById")
     @ApiOperation(value = "Find book by id", response = BooksDto.class)
     BooksDto findBookById(@RequestParam Integer id) {
         log.info("handling findBookById request: id=" + id);
         return bookService.findBookById(id);
     }
 
-    @GetMapping("/findAllBooks")
+    @GetMapping("/costumer/findAllBooks")
     @ApiOperation(value = "Find all books", response = List.class)
     List<BooksDto> findAllBooks() {
         log.info("handling findAllBooks request");
