@@ -1,6 +1,7 @@
 package com.bookmanagement.entity;
 
 import com.bookmanagement.enums.EnumStatus;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -17,6 +18,7 @@ public class Orders {
     private Integer id;
 
     @Column(name = "date_created")
+    @CreationTimestamp
     private LocalDateTime dateCreated;
 
     @Column(name = "order_date_execution")
@@ -25,6 +27,9 @@ public class Orders {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private EnumStatus status;
+
+    @Column(name = "address")
+    private String address;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -79,6 +84,14 @@ public class Orders {
 
     public void setOrderItems(List<OrderItem> orderItems) {
         this.orderItems = orderItems;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     @Override

@@ -1,0 +1,13 @@
+.crop__preview {
+  overflow: hidden;
+  float: left;
+  margin: 16px;
+  background-color: #f7f7f7;
+  width: 64px;
+  height: 64px;
+}
+
+.crop__preview--lg {
+  width: 240px;
+  height: 160px;
+}

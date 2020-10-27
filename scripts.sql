@@ -52,3 +52,6 @@ alter table orders
 
 alter table books
     add price int;
+
+alter table orders
+	add address text;

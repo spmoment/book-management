@@ -17,10 +17,11 @@ import static java.util.Objects.isNull;
 @Service
 public class DefaultAuthorService implements AuthorService {
 
+    private static final Logger log = Logger.getLogger("DefaultAuthorService.class");
 
     private AuthorsRepository authorsRepository;
     private AuthorsConverter authorsConverter;
-    private static final Logger log = Logger.getLogger("DefaultAuthorService.class");
+
 
     public DefaultAuthorService(AuthorsRepository authorsRepository, AuthorsConverter authorsConverter) {
         this.authorsRepository = authorsRepository;
