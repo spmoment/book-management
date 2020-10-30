@@ -5,10 +5,7 @@ import com.bookmanagement.dto.AuthRequest;
 import com.bookmanagement.dto.AuthResponse;
 import com.bookmanagement.entity.Users;
 import com.bookmanagement.service.UserService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.logging.Logger;
