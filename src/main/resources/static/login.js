@@ -38,7 +38,7 @@ function activate() {
                             localStorage.setItem(USER_TOKEN_KEY, token.token);
                             localStorage.setItem(PHONE_NUMBER, regPhoneNumber);
                             if (token.role == "ADMIN") {
-                                window.location.href="index.html";
+                                window.location.href="admin_page.html";
                             }
                             else {
                                 window.location.href="books_costumer.html";
