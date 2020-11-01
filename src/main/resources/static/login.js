@@ -40,7 +40,7 @@ function activate() {
                                 window.location.href="admin_page.html";
                             }
                             else {
-                                window.location.href="books_costumer.html";
+                                window.location.href="index.html";
                             }
                         }
                     }
