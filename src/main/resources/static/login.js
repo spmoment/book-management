@@ -36,7 +36,6 @@ function activate() {
                         if (this.readyState == 4 && this.status == 200) {
                             var token = JSON.parse(this.responseText);
                             localStorage.setItem(USER_TOKEN_KEY, token.token);
-                            localStorage.setItem(PHONE_NUMBER, regPhoneNumber);
                             if (token.role == "ADMIN") {
                                 window.location.href="admin_page.html";
                             }

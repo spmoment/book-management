@@ -49,11 +49,14 @@ function buy(bookId, bookAuthor, bookTitle, bookPrice) {
 
 function finishPurchase() {
     let books = JSON.parse(localStorage.getItem("books"));
-    var phoneNumber = localStorage.getItem(PHONE_NUMBER);
+    var phoneNumber = document.getElementById("phoneNumber").value;
     var address = document.getElementById("address").value;
 
-    if(address == "") {
-        alert("Enter address")
+    if(phoneNumber == "") {
+        alert("Enter phone number");
+    }
+    else if(address == "") {
+        alert("Enter address");
     }
     else {
         var xhttp = new XMLHttpRequest();
