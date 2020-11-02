@@ -76,6 +76,17 @@
                     var bookAn = document.getElementById("book_an").value;
                     var bookPr = document.getElementById("book_pr").value;
                     var authorId = document.getElementById("author_id").value;
+                    let arrayAuthorsId = [];
+                    arrayAuthorsId = authorId.split(",");
+                    var auth = "";
+                    for (var i = 0; i < arrayAuthorsId.length; i++) {
+                        if (i == 0) {
+                            auth = [{'id': arrayAuthorsId[0]}];
+                        }
+                        else {
+                            auth = auth.concat([{'id': arrayAuthorsId[i]}]);
+                        }
+                    }
 
                     var xhttp = new XMLHttpRequest();
                     xhttp.open("POST", url + "admin/saveBook");
@@ -86,7 +97,9 @@
                     'yearPublishing': bookYearPub,
                     'annotation': bookAn,
                     'price': bookPr,
-                    'authorsDtos': [{'id': authorId}]}));
+                    'authorsDtos':
+                    auth
+                    }));
 
                     xhttp.onreadystatechange = function() {
                             if (this.readyState == 4 && this.status == 200) {
